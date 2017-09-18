@@ -28,14 +28,12 @@ I wrote this in the order given [rubrics](https://review.udacity.com/#!/rubrics/
 [warped]: ./output_images/04_perspective_transform.png "Warp Example"
 [fitted]: ./output_images/05_fit_lines.png "Fitted lines"
 [output]: ./output_images/06_output.png "Output example"
-
 [image3]: ./examples/binary_combo_example.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
-## 
 
 ### Writeup / README
 
