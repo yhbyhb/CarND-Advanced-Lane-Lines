@@ -31,13 +31,13 @@ I wrote this in the order given [rubrics](https://review.udacity.com/#!/rubrics/
 [output_video]: ./output.mp4 "Video"
 
 
-### Writeup / README
+## Writeup / README
 This file `writeup.md` is for writeup. `README.md` describes contents (files and folders) briefly. 
 
 
-### Camera Calibration
+## Camera Calibration
 
-#### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
+### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
 The code for this step is contained in the 2nd code cell of the jupyter notebook located in [`./P4.ipynb`](./P4.ipynb)
 
@@ -47,21 +47,21 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ![alt text][camera_calibration]
 
-### Pipeline (single images)
+## Pipeline (single images)
 
-#### 1. Provide an example of a distortion-corrected image.
+### 1. Provide an example of a distortion-corrected image.
 
 I applied the distortion correction to one of the test images located in `./examples/test3.jpg`. belows are original test image and camera calibrated image.
 ![alt text][test_image_n_undistorted]
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
 I transformed image from RGB to HLS representation for robust detection of lanes.
 I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at 5th cell of [`P4.ipynb`](./P4.ipynb)). S channel is used for color threshold and L channel for x gradient threshold.
  Here's an example of my output for this step. 
 ![alt text][pipeline_out]
 
-#### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
 The code for my perspective transform includes a function called `warper()`, which appears in 6th cell of [`P4.ipynb`](./P4.ipynb).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
@@ -92,20 +92,20 @@ Red line shows that perspective transform was done well as expected.
 
 ![alt text][warped]
 
-#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 I used "Peaks in histogram" method as line finding method. I first take a histogram along all the columns in the lower half of the image. The two most prominent peaks in this histogram will be good indicators of the x-position of the base of the lane lines. Used that point as a starting point for where to search for the lines. I divided height of images with 9 part. Then, I fit 2nd order polynomials with found points. The code for finding lines is at 9th cell of [`P4.ipynb`](./P4.ipynb)
 
 ![alt text][fitted]
 
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 The calculation of the radius of curvature of the lane is performed by function located in 12nd cell and used it in the 71st line of 13rd cell of the jupyter notebook. The y-value where we want radius of curvature is chosen by the the maximum y-value, corresponding to the bottom of the image. Two radius of curvature for left and right lane are calculated. I determined radius of curvature by averaging those two radius. Converting pixel to meter is performed by multiplying given constant ratio. 
 
 The position of vehicle with respect to center is in the process() function located in 62th line of 14th cell of [jupyter notebook](./P4.ipynb). The y-value where we want radius of curvature is chosen by the the maximum y-value. 
 
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 I implemented this step in the 14rd cell of [jupyter notebook](./P4.ipynb) in the function `process()`.
 
@@ -113,16 +113,16 @@ I implemented this step in the 14rd cell of [jupyter notebook](./P4.ipynb) in th
 
 ---
 
-### Pipeline (video)
+## Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
 Here's a [link to my video result](./output.mp4)
 
 ---
 
-### Discussion
+## Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-In project video, One problem I met with was when car is on the road where color of road is changing. It occurs from 20 to 25 seconds and 39 ~ 42 sec. The other problem I met was the shadow of trees on the road. I applied several sanity checks. For example radius cannot be smaller of bigger than certain ratio of previous radius. position of line base which is bottom of the image cannot be moved some amount by frame. If one of sanity checks were failed, I used previous result for that frame. Furthermore, 5 fails in a row, I reset all previous result and find lines from scratch by using peaks in histogram and sliding window method.
+In project video, One problem I met with was when car is on the road where color of road is changing. It occurs from 20 to 25 seconds and 39 ~ 42 sec. The other problem I met was the shadow of trees on the road. I applied several sanity checks. For example radius cannot be smaller of bigger than certain ratio of previous radius. position of line base which is bottom of the image cannot be moved some amount by frame. If one of sanity checks were failed, I used previous result for that frame. Furthermore, 5 fails in a row, I reset all previous result and find lines from scratch by using peaks in histogram and sliding window method. Also, for more robustness, I applied temporal filtering by averaging 4 previous fitted results and current fitted result. this gives smooth movement of lane finding.
