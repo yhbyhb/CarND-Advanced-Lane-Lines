@@ -1,5 +1,5 @@
 # **Advanced Lane Finding Project** 
-by Hanbyul Yang, Sep 16, 2017
+by Hanbyul Yang, Sep 19, 2017
 
 ## Overview
 
@@ -111,7 +111,6 @@ I implemented this step in the 14rd cell of [jupyter notebook](./P4.ipynb) in th
 
 ![alt text][output]
 
----
 
 ## Pipeline (video)
 
@@ -119,7 +118,6 @@ I implemented this step in the 14rd cell of [jupyter notebook](./P4.ipynb) in th
 
 Here's a [link to my video result](./output.mp4)
 
----
 
 ## Discussion
 
