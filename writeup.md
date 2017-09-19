@@ -32,6 +32,7 @@ I wrote this in the order given [rubrics](https://review.udacity.com/#!/rubrics/
 
 
 ### Writeup / README
+This file `writeup.md` is for writeup. `README.md` describes files briefly. 
 
 
 ### Camera Calibration
