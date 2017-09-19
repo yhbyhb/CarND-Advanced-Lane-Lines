@@ -32,14 +32,14 @@ I wrote this in the order given [rubrics](https://review.udacity.com/#!/rubrics/
 
 
 ### Writeup / README
-This file `writeup.md` is for writeup. `README.md` describes files briefly. 
+This file `writeup.md` is for writeup. `README.md` describes contents (files and folders) briefly. 
 
 
 ### Camera Calibration
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the 2nd code cell of the jupyter notebook located in ".//P4.ipynb"
+The code for this step is contained in the 2nd code cell of the jupyter notebook located in [`./P4.ipynb`](./P4.ipynb)
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
@@ -51,13 +51,13 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images located in "./examples/test3.jpg". belows are original test image and camera calibrated image.
+I applied the distortion correction to one of the test images located in `./examples/test3.jpg`. belows are original test image and camera calibrated image.
 ![alt text][test_image_n_undistorted]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
 I transformed image from RGB to HLS representation for robust detection of lanes.
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at 5th cell of [`P4.ipynb`](./P4.ipynb)). S channel is used for color and L channel for x gradient.
+I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at 5th cell of [`P4.ipynb`](./P4.ipynb)). S channel is used for color threshold and L channel for x gradient threshold.
  Here's an example of my output for this step. 
 ![alt text][pipeline_out]
 
@@ -88,25 +88,26 @@ This resulted in the following source and destination points:
 | 695, 460      | 960, 0        |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+Red line shows that perspective transform was done well as expected.
 
 ![alt text][warped]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-I used "Peaks in histogram" method as line finding method. I first take a histogram along all the columns in the lower half of the image. The two most prominent peaks in this histogram will be good indicators of the x-position of the base of the lane lines. Used that point as a starting point for where to search for the lines. I divided height of images with 9 part. Then, I fit 2nd order polynomials with found points. The code for finding lines is at 9th cell of [`P4.ipynb`](./P4.ipynb))
+I used "Peaks in histogram" method as line finding method. I first take a histogram along all the columns in the lower half of the image. The two most prominent peaks in this histogram will be good indicators of the x-position of the base of the lane lines. Used that point as a starting point for where to search for the lines. I divided height of images with 9 part. Then, I fit 2nd order polynomials with found points. The code for finding lines is at 9th cell of [`P4.ipynb`](./P4.ipynb)
 
 ![alt text][fitted]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-The calculation of the radius of curvature of the lane is performed by function located in 12nd cell and the 51st line of 13rd cell of the jupyter notebook. The y-value where we want radius of curvature is chosen by the the maximum y-value, corresponding to the bottom of the image. Two radius of curvature for left and right lane are calculated. I determined radius of curvature by averaging those two radius. Converting pixel to meter is performed by multiplying given constant ratio. 
+The calculation of the radius of curvature of the lane is performed by function located in 12nd cell and used it in the 71st line of 13rd cell of the jupyter notebook. The y-value where we want radius of curvature is chosen by the the maximum y-value, corresponding to the bottom of the image. Two radius of curvature for left and right lane are calculated. I determined radius of curvature by averaging those two radius. Converting pixel to meter is performed by multiplying given constant ratio. 
 
-The position of vehicle with respect to center is in the process() function located in 66th line of 14th cell of jupyter notebook. The y-value where we want radius of curvature is chosen by the the maximum y-value. 
+The position of vehicle with respect to center is in the process() function located in 62th line of 14th cell of [jupyter notebook](./P4.ipynb). The y-value where we want radius of curvature is chosen by the the maximum y-value. 
 
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in the 13rd cell of jupyter notebook in the function `process()`.
+I implemented this step in the 14rd cell of [jupyter notebook](./P4.ipynb) in the function `process()`.
 
 ![alt text][output]
 
