@@ -39,7 +39,7 @@ This file `writeup.md` is for writeup. `README.md` describes contents (files and
 
 ### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the 2nd code cell of the jupyter notebook located in [`./P4.ipynb`](./P4.ipynb)
+The code for this step is contained in the 2nd cell of the jupyter notebook located in [`./P4.ipynb`](./P4.ipynb)
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
@@ -63,7 +63,7 @@ I used a combination of color and gradient thresholds to generate a binary image
 
 ### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in 6th cell of [`P4.ipynb`](./P4.ipynb).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `warper()`, which appears in 6th cell of [`P4.ipynb`](./P4.ipynb).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose manually the source and destination points which is given in example code as following manner:
 
 ```python
 src = np.float32(
@@ -100,14 +100,14 @@ I used "Peaks in histogram" method as line finding method. I first take a histog
 
 ### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-The calculation of the radius of curvature of the lane is performed by function located in 12nd cell and used it in the 71st line of 13rd cell of the jupyter notebook. The y-value where we want radius of curvature is chosen by the the maximum y-value, corresponding to the bottom of the image. Two radius of curvature for left and right lane are calculated. I determined radius of curvature by averaging those two radius. Converting pixel to meter is performed by multiplying given constant ratio. 
+The calculation of the radius of curvature of the lane is performed by function located in 12th cell and used it in the 71st line of 13th cell of the jupyter notebook. The y-value where we want radius of curvature is chosen by the the maximum y-value, corresponding to the bottom of the image. Two radius of curvature for left and right lane are calculated. I determined radius of curvature by averaging those two radius. Converting pixel to meter is performed by multiplying given constant ratio. 
 
-The position of vehicle with respect to center is in the process() function located in 62th line of 14th cell of [jupyter notebook](./P4.ipynb). The y-value where we want radius of curvature is chosen by the the maximum y-value. 
+The position of vehicle with respect to center is in the process() function located in 62nd line of 14th cell of [jupyter notebook](./P4.ipynb). The y-value where we want radius of curvature is chosen by the the maximum y-value. 
 
 
 ### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in the 14rd cell of [jupyter notebook](./P4.ipynb) in the function `process()`.
+I implemented this step in the 14th cell of [jupyter notebook](./P4.ipynb) in the function `process()`. Lane is colored with green, left lane with red and right lane with blue.
 
 ![alt text][output]
 
@@ -116,6 +116,7 @@ I implemented this step in the 14rd cell of [jupyter notebook](./P4.ipynb) in th
 
 ### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
+The 16th cell of [jupyter notebook](./P4.ipynb) shows the process creating video.
 Here's a [link to my video result](./output.mp4)
 
 
