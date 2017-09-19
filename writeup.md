@@ -24,15 +24,11 @@ I wrote this in the order given [rubrics](https://review.udacity.com/#!/rubrics/
 
 [camera_calibration]: ./output_images/01_camera_calibration.png "calibration test"
 [test_image_n_undistorted]: ./output_images/02_undistoted_test_image.png "test image and undistorted"
-[pipeline_out]: ./output_images/3_pipeline_out.png "Binary Example"
+[pipeline_out]: ./output_images/03_pipeline_out.png "Binary Example"
 [warped]: ./output_images/04_perspective_transform.png "Warp Example"
 [fitted]: ./output_images/05_fit_lines.png "Fitted lines"
 [output]: ./output_images/06_output.png "Output example"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video"
+[output_video]: ./output.mp4 "Video"
 
 
 ### Writeup / README
@@ -119,7 +115,7 @@ I implemented this step in the 13rd cell of jupyter notebook in the function `pr
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output.mp4)
 
 ---
 
@@ -127,4 +123,4 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+In project video, One problem I met with was when car is on the road where color of road is changing. It occurs from 20 to 25 seconds and 39 ~ 42 sec. The other problem I met was the shadow of trees on the road. I applied several sanity checks. For example radius cannot be smaller of bigger than certain ratio of previous radius. position of line base which is bottom of the image cannot be moved some amount by frame. If one of sanity checks were failed, I used previous result for that frame. Furthermore, 5 fails in a row, I reset all previous result and find lines from scratch by using peaks in histogram and sliding window method.
